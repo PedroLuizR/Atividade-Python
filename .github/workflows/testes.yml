@@ -1,0 +1,29 @@
+name: Correção automática
+
+on: [push, workflow_dispatch]
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+
+      - name: Semana 1 - Produtos (OO)
+        if: always()
+        run: pytest tests/test_semana1.py -v
+
+      - name: Semana 2 - Carrinho (OO)
+        if: always()
+        run: pytest tests/test_semana2.py -v
+
+      - name: Semana 3 - Programação funcional
+        if: always()
+        run: pytest tests/test_semana3.py -v
+
+      - name: Semana 4 - Ordem superior e relatório
+        if: always()
+        run: pytest tests/test_semana4.py -v
